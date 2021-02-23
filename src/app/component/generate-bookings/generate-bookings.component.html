@@ -1,0 +1,42 @@
+<form (ngSubmit)="generateBookings()" [formGroup]="generateBookingsForm" [style.fontSize.px]="16" class="mt-1">
+  <mat-form-field>
+    <mat-label>Vyber datum</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input formControlName="startDate" matStartDate placeholder="Od">
+      <input formControlName="endDate" matEndDate placeholder="Do">
+    </mat-date-range-input>
+    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+    <mat-error *ngIf="form.startDate.errors">Data jsou povinné</mat-error>
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-label>Čas od</mat-label>
+    <input formControlName="startTime" matInput type="time">
+    <mat-error *ngIf="form.startDate.errors">Čas je povinný</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Čas do</mat-label>
+    <input formControlName="endTime" matInput type="time">
+    <mat-error *ngIf="form.startDate.errors">Čas je povinný</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Interval v minutách</mat-label>
+    <input formControlName="duration" matInput max="120" min="20" type="number">
+    <mat-error *ngIf="form.startDate.errors">Interval musí být mezi 20 a 120 minutami</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Hřiště</mat-label>
+    <mat-select formControlName="sportsFieldId">
+      <mat-option *ngFor="let sportsField of sportsFields" value="{{sportsField.id}}">{{sportsField.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <section>
+    <button color="primary" mat-raised-button>Vygenerovat</button>
+  </section>
+</form>

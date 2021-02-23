@@ -1,0 +1,34 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="sportsFieldForm">
+  <p>
+    <mat-form-field>
+      <mat-label>Jméno</mat-label>
+      <input formControlName="name" matInput>
+      <mat-error *ngIf="sportsFieldForm.controls.name.errors">Jméno je povinné</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button color="primary" mat-raised-button>Vytvořit</button>
+  </p>
+</form>
+<table [dataSource]="sportsFields" mat-table style="width: 100%">
+  <ng-container matColumnDef="Id">
+    <th *matHeaderCellDef mat-header-cell scope="col">Id</th>
+    <td *matCellDef="let sportsField" mat-cell> {{sportsField.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Name">
+    <th *matHeaderCellDef mat-header-cell scope="col">Jméno</th>
+    <td *matCellDef="let sportsField" mat-cell> {{sportsField.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Delete">
+    <th *matHeaderCellDef mat-header-cell scope="col">Delete</th>
+    <td *matCellDef="let sportsField" mat-cell>
+      <button (click)="deleteSportsField(sportsField.id)" color="warn" mat-raised-button>Smazat</button>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>
+

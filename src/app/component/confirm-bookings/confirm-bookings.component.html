@@ -1,0 +1,33 @@
+<table [dataSource]="requestedBookings" mat-table style="width: 100%">
+  <ng-container matColumnDef="Hřiště">
+    <th *matHeaderCellDef mat-header-cell scope="col">Hřiště</th>
+    <td *matCellDef="let booking" mat-cell> {{booking.sportsField.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Datum a čas">
+    <th *matHeaderCellDef mat-header-cell scope="col">Datum a čas</th>
+    <td *matCellDef="let booking" mat-cell> {{booking.bookedDate}} - {{booking.startTime}} - {{booking.endTime}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Uživatel">
+    <th *matHeaderCellDef mat-header-cell scope="col">Uživatel</th>
+    <td *matCellDef="let booking" mat-cell> {{booking.user.firstName}} {{booking.user.lastName}} {{booking.user.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Potvrdit">
+    <th *matHeaderCellDef mat-header-cell scope="col">Potvrdit</th>
+    <td *matCellDef="let booking" mat-cell>
+      <button mat-flat-button color="primary" (click)="confirmBooking(booking)">Potvrdit</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Smazat">
+    <th *matHeaderCellDef mat-header-cell scope="col">Smazat</th>
+    <td *matCellDef="let booking" mat-cell>
+      <button mat-flat-button color="warn" (click)="removeRequest(booking)">Smazat</button>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>
