@@ -19,7 +19,7 @@ export class ConfirmBookingsComponent implements OnInit {
   }
 
   public removeRequest(booking: Booking): void {
-    this.bookingService.removerRequest(booking.bookingId)
+    this.bookingService.removeBooking(booking.bookingId)
       .toPromise()
       .then(() => {
         this.snackBarService.openSnackBar('Rezervace zrušena', 'Ok');
@@ -37,9 +37,9 @@ export class ConfirmBookingsComponent implements OnInit {
   }
 
   private loadRequestedBookings(): void {
-    this.bookingService.getRequestedBookings().subscribe(value => {
+    this.bookingService.getRequestedBookings()
+      .subscribe(value => {
       this.requestedBookings = value;
-      console.log(value);
     });
   }
 

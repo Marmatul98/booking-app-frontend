@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">Datum a čas</th>
+    <th scope="col">Hřiště</th>
+    <th scope="col">Uživatel</th>
+    <th scope="col">Zrušit</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let booking of bookings">
+    <td>
+      {{ booking.bookedDate }}
+      {{booking.startTime}} - {{booking.endTime}}
+    </td>
+    <td>{{ booking.sportsField.name }}</td>
+    <td *ngIf="booking.user !== null">{{ booking.user.firstName }} {{booking.user.lastName}} -
+      {{booking.user.email}}
+    </td>
+    <td>
+      <button mat-mini-fab color="warn" (click)="removeBooking(booking)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

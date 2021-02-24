@@ -1,4 +1,5 @@
-<table [dataSource]="requestedBookings" mat-table style="width: 100%">
+<h2 *ngIf="requestedBookings.length===0">Žádné rezervace k potvrzení!</h2>
+<table *ngIf="requestedBookings.length!==0" [dataSource]="requestedBookings" mat-table style="width: 100%">
   <ng-container matColumnDef="Hřiště">
     <th *matHeaderCellDef mat-header-cell scope="col">Hřiště</th>
     <td *matCellDef="let booking" mat-cell> {{booking.sportsField.name}} </td>
@@ -11,20 +12,21 @@
 
   <ng-container matColumnDef="Uživatel">
     <th *matHeaderCellDef mat-header-cell scope="col">Uživatel</th>
-    <td *matCellDef="let booking" mat-cell> {{booking.user.firstName}} {{booking.user.lastName}} {{booking.user.email}} </td>
+    <td *matCellDef="let booking"
+        mat-cell> {{booking.user.firstName}} {{booking.user.lastName}} {{booking.user.email}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Potvrdit">
     <th *matHeaderCellDef mat-header-cell scope="col">Potvrdit</th>
     <td *matCellDef="let booking" mat-cell>
-      <button mat-flat-button color="primary" (click)="confirmBooking(booking)">Potvrdit</button>
+      <button (click)="confirmBooking(booking)" color="primary" mat-flat-button>Potvrdit</button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="Smazat">
     <th *matHeaderCellDef mat-header-cell scope="col">Smazat</th>
     <td *matCellDef="let booking" mat-cell>
-      <button mat-flat-button color="warn" (click)="removeRequest(booking)">Smazat</button>
+      <button (click)="removeRequest(booking)" color="warn" mat-flat-button>Smazat</button>
     </td>
   </ng-container>
 

@@ -31,6 +31,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogBodyComponent } from './component/dialog-body/dialog-body.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ViewBookingsComponent } from './component/view-bookings/view-bookings.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { DialogBodyComponent } from './component/dialog-body/dialog-body.compone
     SportsFieldComponent,
     ConfirmBookingsComponent,
     AdminBookingComponent,
-    DialogBodyComponent
+    DialogBodyComponent,
+    ViewBookingsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,9 @@ import { DialogBodyComponent } from './component/dialog-body/dialog-body.compone
     MatCardModule,
     NgbModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [
     {

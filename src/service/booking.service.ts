@@ -30,6 +30,10 @@ export class BookingService extends HttpService {
     return super.get('/bookings' + sportsFieldId);
   }
 
+  public getConfirmedBookings(): Observable<Booking[]> {
+    return super.get('/confirmedBookings');
+  }
+
   public getBookingsBySportsFieldIdAndDate(sportsFieldId: number, date: Date): Observable<Booking[]> {
     return super.get(`/booking/${sportsFieldId}/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
   }
@@ -42,7 +46,7 @@ export class BookingService extends HttpService {
     return super.put(`/booking/confirm/${bookingId}`, null);
   }
 
-  removerRequest(bookingId: number): Observable<any> {
+  removeBooking(bookingId: number): Observable<any> {
     return super.put(`/booking/remove/${bookingId}`, null);
   }
 }
