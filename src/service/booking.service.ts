@@ -1,9 +1,9 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpService} from './http.service';
 import {Observable} from 'rxjs';
-import {MyTime} from '../model/MyTime';
 import {Booking} from '../model/Booking';
 import {RegisterData} from '../model/RegisterData';
+import {BookingRequest} from '../model/BookingRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,10 @@ export class BookingService extends HttpService {
 
   constructor(injector: Injector) {
     super(injector);
+  }
+
+  public createAdminBooking(bookingRequest: BookingRequest): Observable<any> {
+    return super.post('/admin/booking', bookingRequest);
   }
 
   public getRequestedBookings(): Observable<Booking[]> {
@@ -30,17 +34,8 @@ export class BookingService extends HttpService {
     return super.get(`/booking/${sportsFieldId}/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
   }
 
-  public generateBookings(
-    startDate: Date, endDate: Date, startTime: MyTime, endTime: MyTime, duration: number, sportsFieldId: number): Observable<any> {
-    console.log({startDate, endDate, startTime, endTime, duration});
-    return super.post('/generateBookings', {
-      startDate: startDate.toLocaleDateString(),
-      endDate: endDate.toLocaleDateString(),
-      startTime: startTime.toString(),
-      endTime: endTime.toString(),
-      durationInMinutes: duration,
-      sportsFieldId
-    });
+  public generateBookings(bookingRequest: BookingRequest): Observable<any> {
+    return super.post('/generateBookings', bookingRequest);
   }
 
   confirmBooking(bookingId: number): Observable<any> {

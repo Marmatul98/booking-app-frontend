@@ -15,7 +15,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
-import {AdminComponent} from './component/admin/admin.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {GenerateBookingsComponent} from './component/generate-bookings/generate-bookings.component';
@@ -26,10 +25,25 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
-import { ConfirmBookingsComponent } from './component/confirm-bookings/confirm-bookings.component';
+import {ConfirmBookingsComponent} from './component/confirm-bookings/confirm-bookings.component';
+import {AdminBookingComponent} from './component/admin-booking/admin-booking.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogBodyComponent } from './component/dialog-body/dialog-body.component';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, BookingComponent, ErrorComponent, AdminComponent, GenerateBookingsComponent, SportsFieldComponent, ConfirmBookingsComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    BookingComponent,
+    ErrorComponent,
+    GenerateBookingsComponent,
+    SportsFieldComponent,
+    ConfirmBookingsComponent,
+    AdminBookingComponent,
+    DialogBodyComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,7 +62,10 @@ import { ConfirmBookingsComponent } from './component/confirm-bookings/confirm-b
     MatSelectModule,
     MatSnackBarModule,
     MatButtonToggleModule,
-    MatCardModule
+    MatCardModule,
+    NgbModule,
+    MatRadioModule,
+    MatDialogModule
   ],
   providers: [
     {
@@ -66,6 +83,7 @@ import { ConfirmBookingsComponent } from './component/confirm-bookings/confirm-b
     }
   ],
   bootstrap: [AppComponent],
+  entryComponents: [DialogBodyComponent]
 })
 export class AppModule {
 }
