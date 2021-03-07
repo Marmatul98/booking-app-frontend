@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {HttpClient} from '@angular/common/http';
+import {AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +14,20 @@ export class AppComponent {
 
   public isMenuCollapsed = true;
 
-  constructor(private jwtService: JwtHelperService, private http: HttpClient) {
-    console.log(this.jwtService.decodeToken());
+  constructor(private jwtService: JwtHelperService, private authService: AuthenticationService) {
+    console.log(this.authService.getUserRole());
   }
 
   public isUserLoggedIn(): boolean {
-    return !this.jwtService.isTokenExpired();
+    return this.authService.isUserLoggedIn();
   }
 
   public logout(): void {
-    sessionStorage.removeItem('access_token');
+    this.authService.logout();
+  }
+
+  public getUserRole(): string {
+    return this.authService.getUserRole();
   }
 }
 

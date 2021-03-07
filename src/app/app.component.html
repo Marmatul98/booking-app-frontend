@@ -10,7 +10,7 @@
       <li class="nav-item active">
         <a style="color: white" mat-button [routerLink]="'booking'" (click)="isMenuCollapsed = true">Rezervace</a>
       </li>
-      <li ngbDropdown class="nav-item active">
+      <li ngbDropdown class="nav-item active" [hidden]="getUserRole() !== 'ROLE_ADMIN'">
         <a style="color: white" mat-button (click)="false" class="nav-link" ngbDropdownToggle>Admin</a>
         <div ngbDropdownMenu>
           <a class="dropdown-item" [routerLink]="'admin/booking'">Správa rezervací</a>
