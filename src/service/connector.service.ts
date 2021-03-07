@@ -1,18 +1,23 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {ErrorWrapper} from "../model/ErrorWrapper";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectorService {
 
+  public errorEvent: Subject<ErrorWrapper> = new Subject<ErrorWrapper>();
+
   constructor() {
   }
 
-  public errorEvent: Subject<Error> = new Subject<Error>();
+  public addError(error: Error): void {
+    this.errorEvent.next(new ErrorWrapper(true, error));
+  }
 
-  public showError(error: Error): void {
-    this.errorEvent.next(error);
+  public removeError(): void {
+    this.errorEvent.next(new ErrorWrapper(false, null));
   }
 
 }

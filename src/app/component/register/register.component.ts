@@ -3,6 +3,9 @@ import {AuthenticationService} from '../../../service/authentication.service';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {RegisterData} from '../../../model/RegisterData';
 import {MustMatch} from '../../../validator/MustMatch';
+import {ConnectorService} from "../../../service/connector.service";
+import {ErrorWrapper} from "../../../model/ErrorWrapper";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-register',
@@ -11,8 +14,7 @@ import {MustMatch} from '../../../validator/MustMatch';
 })
 export class RegisterComponent implements OnInit {
 
-  public submitted = false;
-  public errorMsg = '';
+  public showErrorMessage = false;
 
   public registerForm = this.formBuilder.group(
     {
@@ -26,24 +28,34 @@ export class RegisterComponent implements OnInit {
     }
   );
 
+  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder, private connectorService: ConnectorService) {
+  }
+
   get form(): { [p: string]: AbstractControl } {
     return this.registerForm.controls;
   }
 
-  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder) {
-  }
-
   ngOnInit(): void {
+    this.connectorService.errorEvent.subscribe(value => this.handleError(value));
   }
 
   public onSubmit(): void {
-    this.submitted = true;
     if (this.registerForm.valid) {
       this.authService.register(new RegisterData(
         this.registerForm.get('firstName')?.value,
         this.registerForm.get('lastName')?.value,
         this.registerForm.get('email')?.value,
-        this.registerForm.get('password')?.value)).subscribe();
+        this.registerForm.get('password')?.value));
+    }
+  }
+
+  private handleError(errorWrapper: ErrorWrapper): void {
+    if (errorWrapper.isError && errorWrapper.errorObject instanceof HttpErrorResponse) {
+      if (errorWrapper.errorObject.status === 409) {
+        this.showErrorMessage = true;
+      }
+    } else {
+      this.showErrorMessage = false;
     }
   }
 }

@@ -45,7 +45,7 @@ export class AdminBookingComponent implements OnInit {
         this.parseTimeFromForm(this.form.endTime.value),
         this.form.duration.value,
         this.form.sportsFieldId.value
-      )).subscribe(() => this.snackBarService.openSnackBar('Rezervace vytvořeny', 'Ok'), error => console.log(error));
+      )).subscribe(() => this.snackBarService.openSnackBarOk('Rezervace vytvořeny'), error => console.log(error));
   }
 
   public parseTimeFromForm(value: string): MyTime {

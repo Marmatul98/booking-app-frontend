@@ -27,13 +27,15 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {ConfirmBookingsComponent} from './component/confirm-bookings/confirm-bookings.component';
 import {AdminBookingComponent} from './component/admin-booking/admin-booking.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
-import { DialogBodyComponent } from './component/dialog-body/dialog-body.component';
+import {DialogBodyComponent} from './component/dialog-body/dialog-body.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { ViewBookingsComponent } from './component/view-bookings/view-bookings.component';
+import {ViewBookingsComponent} from './component/view-bookings/view-bookings.component';
 import {MatIconModule} from '@angular/material/icon';
+import {LoginComponent} from './component/login/login.component';
+import {JwtModule} from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import {MatIconModule} from '@angular/material/icon';
     ConfirmBookingsComponent,
     AdminBookingComponent,
     DialogBodyComponent,
-    ViewBookingsComponent
+    ViewBookingsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,15 @@ import {MatIconModule} from '@angular/material/icon';
     MatRadioModule,
     MatDialogModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return sessionStorage.getItem('access_token');
+        },
+        allowedDomains: ['localhost:8080'],
+      }
+    })
   ],
   providers: [
     {

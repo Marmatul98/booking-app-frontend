@@ -1,39 +1,49 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="firstName">Jméno</label>
-    <input type="text" class="form-control" id="firstName" formControlName="firstName" required [ngClass]="{'is-invalid' : submitted && form.firstName.errors}">
-    <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
-      <div *ngIf="form.firstName.errors.required">Prosíme zadejte křestní jméno</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="lastName">Příjmení</label>
-    <input type="text" class="form-control" id="lastName" formControlName="lastName" required [ngClass]="{'is-invalid' : submitted && form.lastName.errors}">
-    <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
-      <div *ngIf="form.lastName.errors.required">Prosíme zadejte příjmení</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" formControlName="email" required [ngClass]="{'is-invalid' : submitted && form.email.errors}">
-    <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
-      <div *ngIf="form.email.errors.required">Prosíme zadejte email ve správném formátu</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="password">Heslo</label>
-    <input type="password" class="form-control" id="password" formControlName="password" required [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
-    <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
-      <div *ngIf="form.password.errors.required">Prosíme zvolte heslo</div>
-      <div *ngIf="form.password.errors.minlength">Heslo musí být dlouhé alespoň 8 znaků</div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="confirmPassword">Potvrzení hesla</label>
-    <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required [ngClass]="{ 'is-invalid': submitted && form.confirmPassword.errors }">
-    <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
-      <div *ngIf="form.confirmPassword.errors">Hesla se neshodují</div>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Registrovat</button>
-</form>
+<div class="row justify-content-center">
+  <mat-card>
+    <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" [style.fontSize.px]="16">
+      <mat-card-header>
+        <h1>Registrace</h1>
+      </mat-card-header>
+      <mat-card-content>
+        <p style="color: red" [hidden]="!showErrorMessage">Uživatel s tímto e-mailem již existuje!</p>
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="firstName">
+            <mat-label>Jméno</mat-label>
+          </label>
+          <input formControlName="firstName" id="firstName" matInput type="text">
+          <mat-error *ngIf="form.firstName.errors">Prosím, zadejte jméno</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="lastName">
+            <mat-label>Příjmení</mat-label>
+          </label>
+          <input formControlName="lastName" id="lastName" matInput type="text">
+          <mat-error *ngIf="form.lastName.errors">Prosím, zadejte příjmení</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="email">
+            <mat-label>E-mail</mat-label>
+          </label>
+          <input formControlName="email" id="email" matInput type="email">
+          <mat-error *ngIf="form.email.errors">Prosím, zadejte e-mail</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="password">
+            <mat-label>Heslo</mat-label>
+          </label>
+          <input formControlName="password" id="password" matInput type="password">
+          <mat-error *ngIf="form.password.errors?.required">Prosím, zadejte heslo</mat-error>
+          <mat-error *ngIf="form.password.errors?.minlength">Heslo musí být dlouhé alespoň 8 znaků</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="confirmPassword">
+            <mat-label>Potvrzení hesla</mat-label>
+          </label>
+          <input formControlName="confirmPassword" id="confirmPassword" matInput type="password">
+          <mat-error *ngIf="form.confirmPassword.errors">Hesla se neshodují</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <button color="primary" mat-raised-button>Registrovat</button>
+    </form>
+  </mat-card>
+</div>

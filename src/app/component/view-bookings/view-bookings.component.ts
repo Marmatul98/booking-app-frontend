@@ -26,7 +26,7 @@ export class ViewBookingsComponent implements OnInit {
         if (value) {
           this.bookingService.removeBooking(booking.bookingId)
             .subscribe(() => {
-              this.snackBarService.openSnackBar('Rezervace zrušena', 'OK');
+              this.snackBarService.openSnackBarOk('Rezervace zrušena');
               this.loadConfirmedBookings();
             });
         }

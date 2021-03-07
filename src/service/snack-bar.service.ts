@@ -14,4 +14,9 @@ export class SnackBarService {
       duration: 2000, verticalPosition: 'bottom'
     });
   }
+
+  public openSnackBarOk(message: string): void {
+    this.openSnackBar(message, 'OK');
+  }
+
 }

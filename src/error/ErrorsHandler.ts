@@ -10,9 +10,8 @@ export class ErrorsHandler implements ErrorHandler {
 
   handleError(error: Error | HttpErrorResponse): void {
     if (error instanceof HttpErrorResponse) {
-      console.warn('HttpError');
     } else {
-      this.connectorService.showError(error);
+      this.connectorService.addError(error);
     }
   }
 

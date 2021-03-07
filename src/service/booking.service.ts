@@ -15,38 +15,38 @@ export class BookingService extends HttpService {
   }
 
   public createAdminBooking(bookingRequest: BookingRequest): Observable<any> {
-    return super.post('/admin/booking', bookingRequest);
+    return super.post('admin/booking', bookingRequest);
   }
 
   public getRequestedBookings(): Observable<Booking[]> {
-    return super.get('/requestedBookings');
+    return super.get('admin/requestedBookings');
   }
 
   public requestBooking(bookingId: number, registerData: RegisterData): Observable<any> {
-    return super.put(`/booking/${bookingId}/`, registerData);
+    return super.put(`api/booking/${bookingId}/`, registerData);
   }
 
   public getBookingsBySportsFieldId(sportsFieldId: number): Observable<any> {
-    return super.get('/bookings' + sportsFieldId);
+    return super.get('api/bookings' + sportsFieldId);
   }
 
   public getConfirmedBookings(): Observable<Booking[]> {
-    return super.get('/confirmedBookings');
+    return super.get('admin/confirmedBookings');
   }
 
   public getBookingsBySportsFieldIdAndDate(sportsFieldId: number, date: Date): Observable<Booking[]> {
-    return super.get(`/booking/${sportsFieldId}/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
+    return super.get(`api/booking/${sportsFieldId}/${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
   }
 
   public generateBookings(bookingRequest: BookingRequest): Observable<any> {
-    return super.post('/generateBookings', bookingRequest);
+    return super.post('admin/generateBookings', bookingRequest);
   }
 
   confirmBooking(bookingId: number): Observable<any> {
-    return super.put(`/booking/confirm/${bookingId}`, null);
+    return super.put(`admin/booking/confirm/${bookingId}`, null);
   }
 
   removeBooking(bookingId: number): Observable<any> {
-    return super.put(`/booking/remove/${bookingId}`, null);
+    return super.put(`admin/booking/remove/${bookingId}`, null);
   }
 }

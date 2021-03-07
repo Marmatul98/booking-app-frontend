@@ -58,7 +58,7 @@ export class GenerateBookingsComponent implements OnInit {
           } else {
             result = this.bookingService.createAdminBooking(bookingRequest);
           }
-          result.subscribe(() => this.snackBarService.openSnackBar('Rezervace vytvořeny', 'Ok'));
+          result.subscribe(() => this.snackBarService.openSnackBarOk('Rezervace vytvořeny'));
         }
       });
     }

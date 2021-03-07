@@ -13,15 +13,15 @@ export class SportsFieldService extends HttpService {
   }
 
   public getAllSportsFields(): Observable<SportsField[]> {
-    return super.get('/sportsField');
+    return super.get('api/sportsField');
   }
 
   public addSportsField(name: string): Observable<any> {
-    return super.post('/sportsField', name);
+    return super.post('admin/sportsField', name);
   }
 
   public deleteSportsField(id: number): Observable<any> {
-    return super.delete('/sportsField/' + id);
+    return super.delete('admin/sportsField/' + id);
   }
 
 }

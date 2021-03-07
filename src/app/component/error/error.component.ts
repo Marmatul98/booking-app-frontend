@@ -8,21 +8,28 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
-  private baseErrorMessage = 'Vyskytla se chyba, prosím kontaktuje administrátora!';
-
   public errorMessage = '';
   @ViewChild('alert', {static: true}) alert: ElementRef | undefined;
+  private baseErrorMessage = 'Vyskytla se chyba, prosím kontaktuje administrátora!';
 
   constructor(private connectorService: ConnectorService) {
     this.connectorService.errorEvent.subscribe(error => {
-      console.log(error);
-      this.setErrorMessage(error);
-      console.warn('There has been an error ' + error.message);
+      // console.log(error);
+      // this.setErrorMessage(error.errorObject?.message);
+      // console.warn('There has been an error ' + error.message);
       this.showAlert();
     });
   }
 
   ngOnInit(): void {
+  }
+
+  closeAlert(): void {
+    // @ts-ignore
+    this.alert.nativeElement.classList.remove('show');
+    // @ts-ignore
+    this.alert.nativeElement.classList.add('hide');
+    console.log('hiding alert');
   }
 
   private setErrorMessage(error: Error): void {
@@ -41,14 +48,6 @@ export class ErrorComponent implements OnInit {
       default:
         this.errorMessage = this.baseErrorMessage;
     }
-  }
-
-  closeAlert(): void {
-    // @ts-ignore
-    this.alert.nativeElement.classList.remove('show');
-    // @ts-ignore
-    this.alert.nativeElement.classList.add('hide');
-    console.log('hiding alert');
   }
 
   private showAlert(): void {

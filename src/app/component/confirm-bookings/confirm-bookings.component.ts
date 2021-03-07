@@ -22,7 +22,7 @@ export class ConfirmBookingsComponent implements OnInit {
     this.bookingService.removeBooking(booking.bookingId)
       .toPromise()
       .then(() => {
-        this.snackBarService.openSnackBar('Rezervace zrušena', 'Ok');
+        this.snackBarService.openSnackBarOk('Rezervace zrušena');
         this.loadRequestedBookings();
       });
   }
@@ -31,7 +31,7 @@ export class ConfirmBookingsComponent implements OnInit {
     this.bookingService.confirmBooking(booking.bookingId)
       .toPromise()
       .then(() => {
-        this.snackBarService.openSnackBar('Rezervace potvrzena', 'Ok');
+        this.snackBarService.openSnackBarOk('Rezervace potvrzena');
         this.loadRequestedBookings();
       });
   }

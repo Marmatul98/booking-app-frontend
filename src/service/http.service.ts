@@ -1,28 +1,24 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ConnectorService} from './connector.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  protected http: HttpClient;
-
-  protected baseErrorMessage = 'Vyskytla se chyba, prosím kontaktuje administrátora.';
-
-  protected baseApi = 'http://localhost:8080/api';
+  private http: HttpClient;
+  private baseApi = 'http://localhost:8080/';
+  private connectorService: ConnectorService;
 
   protected constructor(injector: Injector) {
     this.http = injector.get(HttpClient);
+    this.connectorService = injector.get(ConnectorService);
   }
 
   protected post(url: string, data: any): Observable<any> {
-    return this.http.post(this.baseApi + url, data)
-      // .pipe(
-      // retry(1),
-      // catchError(error => this.handleError(error)))
-      ;
+    return this.http.post(this.baseApi + url, data);
   }
 
   protected get(url: string): Observable<any> {
