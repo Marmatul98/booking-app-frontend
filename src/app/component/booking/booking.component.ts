@@ -4,8 +4,9 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {SportsField} from '../../../model/SportsField';
 import {BookingService} from '../../../service/booking.service';
 import {Booking} from '../../../model/Booking';
-import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import {RegisterData} from '../../../model/RegisterData';
+import {FormBuilder} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {CartDialogComponent} from '../cart-dialog/cart-dialog.component';
 
 @Component({
   selector: 'app-booking',
@@ -18,21 +19,35 @@ export class BookingComponent implements OnInit {
 
   public sportsFields: SportsField[] = [];
   public reservationDiv = false;
-  public booking: Booking | undefined;
+  public selectedBookings: Booking[] = [];
 
-  public bookingForm = this.formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]]
-  });
+  bookingSlots: string[] = [];
 
-  get form(): { [key: string]: AbstractControl } {
-    return this.bookingForm.controls;
+  constructor(private sportsFieldService: SportsFieldService,
+              private bookingService: BookingService,
+              private formBuilder: FormBuilder,
+              private dialog: MatDialog) {
   }
 
-  constructor(private sportsFieldService: SportsFieldService, private bookingService: BookingService, private formBuilder: FormBuilder) {
+  do(booking: Booking): void {
+    console.log(booking.bookingId);
+  }
+
+  ngOnInit(): void {
     this.sportsFieldService.getAllSportsFields()
       .subscribe(value => this.sportsFields = value);
+
+    this.bookingService.getBookingTimeSlots()
+      .subscribe(value => this.bookingSlots = value);
+  }
+
+  public openCartDialog(): void {
+    this.dialog.open(CartDialogComponent, {
+      minWidth: '85%',
+      data: {
+        selectedBookings: this.selectedBookings
+      }
+    });
   }
 
   getBookings(type: string, event: MatDatepickerInputEvent<Date>): void {
@@ -40,31 +55,26 @@ export class BookingComponent implements OnInit {
       for (const sportsField of this.sportsFields) {
         this.bookingService.getBookingsBySportsFieldIdAndDate(sportsField.id, event.value)
           .subscribe(value => {
-            console.log(value);
             sportsField.bookings = value;
           });
       }
     }
   }
 
-  public book(booking: Booking): void {
-    this.reservationDiv = true;
-    this.booking = booking;
+
+  public selectBooking(booking: Booking): void {
+    console.log('selecting booking')
+    booking.isSelected = true;
+    this.selectedBookings.push(booking);
   }
 
-  public requestBooking(): void {
-    if (this.bookingForm.valid && this.booking !== undefined) {
-      this.bookingService.requestBooking(this.booking.bookingId, new RegisterData(
-        this.form.firstName.value,
-        this.form.lastName.value,
-        this.form.email.value,
-        ''
-      )).toPromise()
-        .then(() => window.location.reload());
+  public deselectBooking(booking: Booking): void {
+    console.log('deselecting booking')
+    booking.isSelected = false;
+    for (let i = 0; i < this.selectedBookings.length; i++) {
+      if (this.selectedBookings[i] === booking) {
+        this.selectedBookings.splice(i, 1);
+      }
     }
   }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -43,6 +43,7 @@ export class AuthenticationService extends HttpService {
 
   public getUserRole(): string {
     if (this.isUserLoggedIn()) {
+      console.log(this.jwtService.decodeToken());
       return this.jwtService.decodeToken().roles[0];
     } else {
       return 'NOT_LOGGED_IN';

@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Shrnutí rezervace</h1>
+<div mat-dialog-content>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Hřiště</th>
+      <th scope="col">Datum</th>
+      <th scope="col">Čas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let booking of data.selectedBookings">
+      <td>{{booking.sportsField.name}}</td>
+      <td>{{convertToDate(booking.bookedDate)}}</td>
+      <td>od {{booking.startTime}} do {{booking.endTime}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <form [formGroup]="cartForm">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="firstName">
+            <mat-label>Jméno</mat-label>
+          </label>
+          <input formControlName="firstName" id="firstName" matInput type="text">
+          <mat-error *ngIf="form.firstName.errors">Prosíme, zadejte jméno</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="lastName">
+            <mat-label>Příjmení</mat-label>
+          </label>
+          <input formControlName="lastName" id="lastName" matInput type="text">
+          <mat-error *ngIf="form.lastName.errors">Prosíme, zadejte příjmení</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="email">
+            <mat-label>E-mail</mat-label>
+          </label>
+          <input formControlName="email" id="email" matInput type="email">
+          <mat-error *ngIf="form.email.errors">Prosíme, zadejte e-mail</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="standard" style="width: 100%">
+          <label for="mobileNumber">
+            <mat-label>Telefonní číslo</mat-label>
+          </label>
+          <input formControlName="mobileNumber" id="mobileNumber" matInput type="tel">
+          <mat-error *ngIf="form.mobileNumber.errors">Prosíme, zadejte telefonní číslo</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="accent" class="mt-2">Rezervovat</button>
+  </form>
+</div>
+
+

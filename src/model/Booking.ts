@@ -8,6 +8,7 @@ export class Booking {
   public endTime: string;
   public sportsField: SportsField;
   public user: User | null;
+  public isSelected = false;
 
   constructor(bookingId: number, userId: number | null, bookedDate: string, bookedFrom: string, bookedTo: string, sportsField: SportsField, user: User) {
     this.bookingId = bookingId;

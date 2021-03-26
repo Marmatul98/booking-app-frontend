@@ -35,7 +35,17 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {ViewBookingsComponent} from './component/view-bookings/view-bookings.component';
 import {MatIconModule} from '@angular/material/icon';
 import {LoginComponent} from './component/login/login.component';
-import {JwtModule} from "@auth0/angular-jwt";
+import {JwtModule} from '@auth0/angular-jwt';
+import {CalendarComponent} from './component/calendar/calendar.component';
+import {FullCalendarModule} from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import resourceTimeLine from '@fullcalendar/resource-timeline';
+import { CartDialogComponent } from './component/cart-dialog/cart-dialog.component';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  resourceTimeLine
+]);
 
 @NgModule({
   declarations: [
@@ -49,7 +59,9 @@ import {JwtModule} from "@auth0/angular-jwt";
     AdminBookingComponent,
     DialogBodyComponent,
     ViewBookingsComponent,
-    LoginComponent
+    LoginComponent,
+    CalendarComponent,
+    CartDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +94,8 @@ import {JwtModule} from "@auth0/angular-jwt";
         },
         allowedDomains: ['localhost:8080'],
       }
-    })
+    }),
+    FullCalendarModule
   ],
   providers: [
     {
