@@ -20,6 +20,7 @@ export class BookingComponent implements OnInit {
   public sportsFields: SportsField[] = [];
   public reservationDiv = false;
   public selectedBookings: Booking[] = [];
+  public selectedDate = '';
 
   bookingSlots: string[] = [];
 
@@ -27,10 +28,6 @@ export class BookingComponent implements OnInit {
               private bookingService: BookingService,
               private formBuilder: FormBuilder,
               private dialog: MatDialog) {
-  }
-
-  do(booking: Booking): void {
-    console.log(booking.bookingId);
   }
 
   ngOnInit(): void {
@@ -45,12 +42,13 @@ export class BookingComponent implements OnInit {
     this.dialog.open(CartDialogComponent, {
       minWidth: '85%',
       data: {
-        selectedBookings: this.selectedBookings
+        selectedBookings: this.selectedBookings,
       }
     });
   }
 
   getBookings(type: string, event: MatDatepickerInputEvent<Date>): void {
+    this.selectedDate = this.generateDateString(event.value);
     if (event.value !== null) {
       for (const sportsField of this.sportsFields) {
         this.bookingService.getBookingsBySportsFieldIdAndDate(sportsField.id, event.value)
@@ -61,20 +59,52 @@ export class BookingComponent implements OnInit {
     }
   }
 
+  public isBookingAvailable(): boolean {
+    for (const sportsField of this.sportsFields) {
+      if (sportsField.bookings !== undefined && sportsField.bookings.length > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   public selectBooking(booking: Booking): void {
-    console.log('selecting booking')
-    booking.isSelected = true;
-    this.selectedBookings.push(booking);
+    if (booking.user === null) {
+      booking.isSelected = true;
+      this.selectedBookings.push(booking);
+    }
   }
 
   public deselectBooking(booking: Booking): void {
-    console.log('deselecting booking')
     booking.isSelected = false;
     for (let i = 0; i < this.selectedBookings.length; i++) {
       if (this.selectedBookings[i] === booking) {
         this.selectedBookings.splice(i, 1);
       }
     }
+  }
+
+  private generateDateString(value: Date | null): string {
+    return `${this.getDayNameByNumber(value?.getDay())} ${value?.toLocaleDateString()}`;
+  }
+
+  private getDayNameByNumber(dayNumber: number | undefined): string {
+    switch (dayNumber) {
+      case 0:
+        return 'neděle';
+      case 1:
+        return 'pondělí';
+      case 2:
+        return 'úterý';
+      case 3:
+        return 'středa';
+      case 4:
+        return 'čtvrtek';
+      case 5:
+        return 'pátek';
+      case 6:
+        return 'sobota';
+    }
+    return '';
   }
 }

@@ -15,7 +15,6 @@ export class AppComponent {
   public isMenuCollapsed = true;
 
   constructor(private jwtService: JwtHelperService, private authService: AuthenticationService) {
-    console.log(this.authService.getUserRole());
   }
 
   public isUserLoggedIn(): boolean {

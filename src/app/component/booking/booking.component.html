@@ -1,3 +1,5 @@
+<h1>Rezervace</h1>
+<h3>Nejdříve vyberte datum:</h3>
 <mat-form-field [style.fontSize.px]="16" class="mt-1">
   <mat-label>Vyberte datum</mat-label>
   <input (dateChange)="getBookings('change', $event)" (dateInput)="getBookings('input', $event)"
@@ -6,7 +8,6 @@
   <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
   <mat-datepicker #picker disabled="false"></mat-datepicker>
 </mat-form-field>
-
 <!--<div class="row">-->
 <!--  <div *ngIf="sportsFields[0].bookings && sportsFields[0].bookings.length ===0" class="alert alert-info col-md-12"-->
 <!--       role="alert">-->
@@ -21,48 +22,91 @@
 <!--      - {{booking.endTime}}</button>-->
 <!--  </div>-->
 <!--</div>-->
-<div class="shopping-button" *ngIf="selectedBookings.length !==0">
-  <button (click)="openCartDialog()" mat-fab color="accent" class="expand-button" aria-label="Nakupni kosik">
-    <mat-icon>shopping_cart</mat-icon>
-  </button>
-</div>
+
+
+
+<h2 *ngIf="selectedDate !== ''">Vybíráte pro datum: {{this.selectedDate}} </h2>
 
 <div class="table-responsive">
+  <table class="table table-sm">
+    <caption>Tabulka sportů pro jednotlivé sportoviště</caption>
+    <thead>
+    <tr>
+      <th scope="col">Hřiště hala 1</th>
+      <th scope="col">Hřiště hala 2</th>
+      <th scope="col">Hřiště hala 3</th>
+      <th scope="col">Celá hala</th>
+      <th scope="col">Venkovní hřiště</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Badminton</td>
+      <td>Badminton</td>
+      <td>Badminton</td>
+      <td>Fotbal</td>
+      <td>Tenis</td>
+    </tr>
+    <tr>
+      <td>Další sport</td>
+      <td>Další sport</td>
+      <td>Další sport</td>
+      <td>Další sport</td>
+      <td>Další sport</td>
+    </tr>
+    <tr>
+      <td>Další sport</td>
+      <td>Další sport</td>
+      <td>Další sport</td>
+      <td>Další sport</td>
+      <td>Další sport</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive" *ngIf="selectedDate !== '' && isBookingAvailable()">
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">Hřiště</th>
-      <th colspan="2" scope="col">8:00</th>
-      <th colspan="2" scope="col">9:00</th>
-      <th colspan="2" scope="col">10:00</th>
-      <th colspan="2" scope="col">11:00</th>
-      <th colspan="2" scope="col">12:00</th>
-      <th colspan="2" scope="col">13:00</th>
-      <th colspan="2" scope="col">14:00</th>
-      <th colspan="2" scope="col">15:00</th>
-      <th colspan="2" scope="col">16:00</th>
-      <th colspan="2" scope="col">17:00</th>
-      <th colspan="2" scope="col">18:00</th>
-      <th colspan="2" scope="col">19:00</th>
-      <th colspan="2" scope="col">20:00</th>
-      <th colspan="2" scope="col">21:00</th>
+      <th class="header" scope="col">Hřiště</th>
+      <th class="header" colspan="2" scope="col">8:00</th>
+      <th class="header" colspan="2" scope="col">9:00</th>
+      <th class="header" colspan="2" scope="col">10:00</th>
+      <th class="header" colspan="2" scope="col">11:00</th>
+      <th class="header" colspan="2" scope="col">12:00</th>
+      <th class="header" colspan="2" scope="col">13:00</th>
+      <th class="header" colspan="2" scope="col">14:00</th>
+      <th class="header" colspan="2" scope="col">15:00</th>
+      <th class="header" colspan="2" scope="col">16:00</th>
+      <th class="header" colspan="2" scope="col">17:00</th>
+      <th class="header" colspan="2" scope="col">18:00</th>
+      <th class="header" colspan="2" scope="col">19:00</th>
+      <th class="header" colspan="2" scope="col">20:00</th>
+      <th class="header" colspan="2" scope="col">21:00</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let sportField of sportsFields">
-      <td>{{sportField.name}}</td>
+      <td class="sportsField-name">{{sportField.name}}</td>
       <td (click)="booking.isSelected ? deselectBooking(booking) : selectBooking(booking)"
-          [ngClass]="{'slot slot-full': booking.user !==null,
-           'slot slot-empty':booking.user === null,
-            'slot slot-selected': booking.isSelected}"
+          class="slot"
+          [ngClass]="{'slot-full': booking.user !==null,
+           'slot-empty':booking.user === null && !booking.isSelected,
+            'slot-selected': booking.isSelected}"
           *ngFor="let booking of sportField.bookings"></td>
     </tr>
     </tbody>
   </table>
 </div>
 
+<ngb-alert [dismissible]="false" type="info" *ngIf="selectedDate !== '' && !isBookingAvailable()">
+  <strong>Pozor!</strong> Pro zvolené datum nelze rezervovat!
+</ngb-alert>
+
 <div class="shopping-button" *ngIf="selectedBookings.length !==0">
   <button (click)="openCartDialog()" mat-fab color="accent" class="expand-button" aria-label="Nakupni kosik">
     <mat-icon>shopping_cart</mat-icon>
   </button>
 </div>
+

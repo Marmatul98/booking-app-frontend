@@ -10,8 +10,8 @@ export class BookingRequest {
 
 
   constructor(startDate: Date, endDate: Date, startTime: MyTime, endTime: MyTime, durationInMinutes: number, sportsFieldId: number) {
-    this.startDate = startDate.toISOString();
-    this.endDate = endDate.toISOString();
+    this.startDate = startDate.toLocaleDateString();
+    this.endDate = endDate.toLocaleDateString();
     this.startTime = startTime.toString();
     this.endTime = endTime.toString();
     this.durationInMinutes = durationInMinutes;

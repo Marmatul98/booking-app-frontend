@@ -11,27 +11,36 @@
 .slot {
   border: 1px solid #ddd;
   cursor: pointer;
-  background-color: deepskyblue;
-  /*min-width: 25px !important;*/
-  /*min-height: 10px !important;*/
-  /*width: 10px !important;*/
-  /*height: 25px !important;*/
+  min-width: 25px !important;
+  min-height: 25px !important;
+  width: 25px !important;
+  height: 25px !important;
+  max-width: 25px !important;
+  max-height: 25px !important;
   margin: 0 !important;
   padding: 0 !important;
 }
-.slot.slot-empty {
+.slot-empty {
   background-color: deepskyblue;
 }
 
-.slot.slot-full {
+.slot-full {
   background-color: darkred;
   cursor: not-allowed;
 }
 
-.slot.slot-selected {
+.slot-selected {
   background-color: yellow;
 }
 
-th {
+.sportsField-name {
+  max-width: 70px !important;
+  max-height: 25px !important;
+  height: 25px !important;
+}
+.header {
   border: 1px solid #ddd;
+  text-align: center;
+  min-width: 62px !important;
+  max-width: 70px !important;
 }

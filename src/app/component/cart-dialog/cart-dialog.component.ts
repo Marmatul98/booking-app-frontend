@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {Booking} from '../../../model/Booking';
 
 @Component({
   selector: 'app-cart-dialog',
@@ -8,6 +9,8 @@ import {AbstractControl, FormBuilder, Validators} from "@angular/forms";
   styleUrls: ['./cart-dialog.component.css']
 })
 export class CartDialogComponent implements OnInit {
+
+  public selectedBookings: Booking[] = [];
 
   public cartForm = this.formBuilder.group({
     firstName: ['', Validators.required],
@@ -17,17 +20,30 @@ export class CartDialogComponent implements OnInit {
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private formBuilder: FormBuilder) {
-  }
-
-  ngOnInit(): void {
+              private formBuilder: FormBuilder,
+              public dialogRef: MatDialogRef<CartDialogComponent>) {
   }
 
   public get form(): { [key: string]: AbstractControl } {
     return this.cartForm.controls;
   }
+  ngOnInit(): void {
+    this.selectedBookings = this.data.selectedBookings;
+  }
 
   public convertToDate(value: string): string {
     return new Date(value).toLocaleDateString();
+  }
+
+  public deselectBooking(booking: Booking): void {
+    booking.isSelected = false;
+    for (let i = 0; i < this.selectedBookings.length; i++) {
+      if (this.selectedBookings[i] === booking) {
+        this.selectedBookings.splice(i, 1);
+      }
+    }
+    if (this.selectedBookings.length === 0) {
+      this.dialogRef.close();
+    }
   }
 }

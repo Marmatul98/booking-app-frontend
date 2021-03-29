@@ -36,7 +36,6 @@ import {ViewBookingsComponent} from './component/view-bookings/view-bookings.com
 import {MatIconModule} from '@angular/material/icon';
 import {LoginComponent} from './component/login/login.component';
 import {JwtModule} from '@auth0/angular-jwt';
-import {CalendarComponent} from './component/calendar/calendar.component';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import resourceTimeLine from '@fullcalendar/resource-timeline';
@@ -60,7 +59,6 @@ FullCalendarModule.registerPlugins([
     DialogBodyComponent,
     ViewBookingsComponent,
     LoginComponent,
-    CalendarComponent,
     CartDialogComponent,
   ],
   imports: [
@@ -94,8 +92,7 @@ FullCalendarModule.registerPlugins([
         },
         allowedDomains: ['localhost:8080'],
       }
-    }),
-    FullCalendarModule
+    })
   ],
   providers: [
     {

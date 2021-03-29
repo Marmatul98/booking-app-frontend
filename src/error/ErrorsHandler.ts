@@ -12,6 +12,7 @@ export class ErrorsHandler implements ErrorHandler {
     if (error instanceof HttpErrorResponse) {
     } else {
       this.connectorService.addError(error);
+      console.warn(`ANGULAR ERROR: ${error}`);
     }
   }
 

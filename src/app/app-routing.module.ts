@@ -6,7 +6,6 @@ import {SportsFieldComponent} from './component/sports-field/sports-field.compon
 import {AdminBookingComponent} from './component/admin-booking/admin-booking.component';
 import {LoginComponent} from './component/login/login.component';
 import {AuthGuard} from '../security/auth.guard';
-import {CalendarComponent} from "./component/calendar/calendar.component";
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -28,7 +27,6 @@ const routes: Routes = [
     }
   },
   {path: 'login', component: LoginComponent},
-  {path: 'calendar', component: CalendarComponent}
 ];
 
 @NgModule({

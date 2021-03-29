@@ -6,13 +6,17 @@
       <th scope="col">Hřiště</th>
       <th scope="col">Datum</th>
       <th scope="col">Čas</th>
+      <th scope="col">Odstranit</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let booking of data.selectedBookings">
+    <tr *ngFor="let booking of selectedBookings">
       <td>{{booking.sportsField.name}}</td>
       <td>{{convertToDate(booking.bookedDate)}}</td>
       <td>od {{booking.startTime}} do {{booking.endTime}}</td>
+      <td> <button mat-mini-fab color="warn" (click)="deselectBooking(booking)">
+        <mat-icon>delete</mat-icon>
+      </button></td>
     </tr>
     </tbody>
   </table>
