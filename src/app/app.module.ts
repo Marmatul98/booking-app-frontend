@@ -39,7 +39,8 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {FullCalendarModule} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import resourceTimeLine from '@fullcalendar/resource-timeline';
-import { CartDialogComponent } from './component/cart-dialog/cart-dialog.component';
+import {CartDialogComponent} from './component/cart-dialog/cart-dialog.component';
+import {ExceptionComponent} from './component/exception/exception.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -60,6 +61,7 @@ FullCalendarModule.registerPlugins([
     ViewBookingsComponent,
     LoginComponent,
     CartDialogComponent,
+    ExceptionComponent,
   ],
   imports: [
     BrowserModule,

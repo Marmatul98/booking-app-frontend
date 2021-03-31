@@ -1,0 +1,18 @@
+<div *ngIf="exceptions.length > 0">
+  <mat-expansion-panel *ngFor="let exception of exceptions" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{exception.date}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{exception.message}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{exception.stackTrace}}</p>
+    <button (click)="deleteExceptionLog(exception)" color="warn" mat-raised-button>Smazat</button>
+  </mat-expansion-panel>
+</div>
+<ngb-alert *ngIf="exceptions.length === 0" [dismissible]="false" type="success">
+  Žádné chybové stavy k zobrazení
+</ngb-alert>
+

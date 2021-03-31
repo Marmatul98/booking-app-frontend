@@ -6,6 +6,7 @@ import {SportsFieldComponent} from './component/sports-field/sports-field.compon
 import {AdminBookingComponent} from './component/admin-booking/admin-booking.component';
 import {LoginComponent} from './component/login/login.component';
 import {AuthGuard} from '../security/auth.guard';
+import {ExceptionComponent} from './component/exception/exception.component';
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -21,6 +22,14 @@ const routes: Routes = [
   {
     path: 'admin/booking',
     component: AdminBookingComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: 'ROLE_ADMIN'
+    }
+  },
+  {
+    path: 'admin/exception',
+    component: ExceptionComponent,
     canActivate: [AuthGuard],
     data: {
       roles: 'ROLE_ADMIN'
