@@ -24,8 +24,6 @@ export class BookingComponent implements OnInit {
   public selectedDate = '';
   public isLoggedIn = false;
 
-  bookingSlots: string[] = [];
-
   constructor(private sportsFieldService: SportsFieldService,
               private bookingService: BookingService,
               private formBuilder: FormBuilder,
@@ -36,9 +34,6 @@ export class BookingComponent implements OnInit {
   ngOnInit(): void {
     this.sportsFieldService.getAllSportsFields()
       .subscribe(value => this.sportsFields = value);
-
-    this.bookingService.getBookingTimeSlots()
-      .subscribe(value => this.bookingSlots = value);
 
     this.isLoggedIn = this.authService.isUserLoggedIn();
   }

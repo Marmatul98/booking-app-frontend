@@ -41,6 +41,9 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import resourceTimeLine from '@fullcalendar/resource-timeline';
 import {CartDialogComponent} from './component/cart-dialog/cart-dialog.component';
 import {ExceptionComponent} from './component/exception/exception.component';
+import {ProfileComponent} from './component/profile/profile.component';
+import {UsersContactComponent} from './component/profile/users-contact/users-contact.component';
+import {UserBookingsComponent} from './component/profile/user-bookings/user-bookings.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -62,6 +65,9 @@ FullCalendarModule.registerPlugins([
     LoginComponent,
     CartDialogComponent,
     ExceptionComponent,
+    ProfileComponent,
+    UsersContactComponent,
+    UserBookingsComponent,
   ],
   imports: [
     BrowserModule,

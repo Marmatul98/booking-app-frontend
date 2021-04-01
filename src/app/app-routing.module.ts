@@ -7,10 +7,19 @@ import {AdminBookingComponent} from './component/admin-booking/admin-booking.com
 import {LoginComponent} from './component/login/login.component';
 import {AuthGuard} from '../security/auth.guard';
 import {ExceptionComponent} from './component/exception/exception.component';
+import {ProfileComponent} from './component/profile/profile.component';
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'booking', component: BookingComponent},
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_ADMIN', 'ROLE_USER']
+    }
+  },
   {
     path: 'admin/sportsField',
     component: SportsFieldComponent,

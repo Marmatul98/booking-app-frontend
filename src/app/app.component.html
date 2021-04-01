@@ -18,6 +18,9 @@
           <a [routerLink]="'admin/exception'" class="dropdown-item">Správa chyb</a>
         </div>
       </li>
+      <li [hidden]="!isUserLoggedIn()" class="nav-item active">
+        <a (click)="isMenuCollapsed = true" [routerLink]="'profile'" mat-button style="color: white">Profil</a>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active" [hidden]="isUserLoggedIn()">

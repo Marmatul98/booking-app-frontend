@@ -42,15 +42,15 @@ export class BookingService extends HttpService {
     return super.post('admin/generateBookings', bookingRequest);
   }
 
-  confirmBooking(bookingId: number): Observable<any> {
+  public confirmBooking(bookingId: number): Observable<any> {
     return super.put(`admin/booking/confirm/${bookingId}`, null);
   }
 
-  removeBooking(bookingId: number): Observable<any> {
+  public removeBooking(bookingId: number): Observable<any> {
     return super.put(`admin/booking/remove/${bookingId}`, null);
   }
 
-  getBookingTimeSlots(): Observable<string[]> {
-    return super.get('api/bookingSlots');
+  public getUserBookings(userId: number): Observable<Booking[]> {
+    return super.get(`api/userBookings/${userId}`);
   }
 }
