@@ -4,6 +4,7 @@ import {HttpService} from './http.service';
 import {Router} from '@angular/router';
 import {SnackBarService} from './snack-bar.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,14 @@ export class AuthenticationService extends HttpService {
 
   public isUserLoggedIn(): boolean {
     return !this.jwtService.isTokenExpired();
+  }
+
+  public getUserId(): Observable<number> {
+    if (this.isUserLoggedIn()) {
+      return super.get(`api/userId/${this.jwtService.decodeToken().sub}`);
+    } else {
+      throw new Error('User is not logged in');
+    }
   }
 
   public logout(): void {

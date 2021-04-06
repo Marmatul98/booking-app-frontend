@@ -1,1 +1,39 @@
-<p>user-bookings works!</p>
+<h1>Moje rezervace</h1>
+<div>
+  <h2>Budoucí rezervace</h2>
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Datum</th>
+      <th scope="col">Čas</th>
+      <th scope="col">Hřiště</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let booking of futureBookings">
+      <td>{{convertToDate(booking.bookedDate)}}</td>
+      <td>{{booking.startTime}} - {{booking.endTime}}</td>
+      <td>{{booking.sportsField.name}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <h2>Uplynulé rezervace</h2>
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">Datum</th>
+      <th scope="col">Čas</th>
+      <th scope="col">Hřiště</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let booking of pastBookings">
+      <td>{{convertToDate(booking.bookedDate)}}</td>
+      <td>{{booking.startTime}} - {{booking.endTime}}</td>
+      <td>{{booking.sportsField.name}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -50,7 +50,11 @@ export class BookingService extends HttpService {
     return super.put(`admin/booking/remove/${bookingId}`, null);
   }
 
-  public getUserBookings(userId: number): Observable<Booking[]> {
-    return super.get(`api/userBookings/${userId}`);
+  public getPastUserBookings(userId: number): Observable<Booking[]> {
+    return super.get(`api/pastUserBookings/${userId}`);
+  }
+
+  getFutureUserBookings(userId: number): Observable<Booking[]> {
+    return super.get(`api/futureUserBookings/${userId}`);
   }
 }

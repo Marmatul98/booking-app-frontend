@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Shrnutí rezervace</h1>
 <div mat-dialog-content>
-  <table class="table">
+  <table class="table table-sm">
     <thead>
     <tr>
       <th scope="col">Hřiště</th>
@@ -13,7 +13,7 @@
     <tr *ngFor="let booking of selectedBookings">
       <td>{{booking.sportsField.name}}</td>
       <td>{{convertToDate(booking.bookedDate)}}</td>
-      <td>od {{booking.startTime}} do {{booking.endTime}}</td>
+      <td>{{booking.startTime}} - {{booking.endTime}}</td>
       <td> <button mat-mini-fab color="warn" (click)="deselectBooking(booking)">
         <mat-icon>delete</mat-icon>
       </button></td>
