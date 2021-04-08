@@ -4,7 +4,7 @@ import {HttpService} from './http.service';
 import {Router} from '@angular/router';
 import {SnackBarService} from './snack-bar.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +56,13 @@ export class AuthenticationService extends HttpService {
     } else {
       return 'NOT_LOGGED_IN';
     }
+  }
+
+  public requestPasswordReset(email: string): Observable<any> {
+    return super.post('auth/requestPasswordReset', email);
+  }
+
+  public resetPassword(newPassword: string, token: string): Observable<any> {
+    return super.put('auth/resetPassword', {newPassword, token});
   }
 }

@@ -3,9 +3,9 @@ import {AuthenticationService} from '../../../service/authentication.service';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {RegisterData} from '../../../model/RegisterData';
 import {MustMatch} from '../../../validator/MustMatch';
-import {ConnectorService} from "../../../service/connector.service";
-import {ErrorWrapper} from "../../../model/ErrorWrapper";
-import {HttpErrorResponse} from "@angular/common/http";
+import {ConnectorService} from '../../../service/connector.service';
+import {ErrorWrapper} from '../../../model/ErrorWrapper';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +21,11 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['+420',
+        [Validators.required,
+          Validators.pattern('[+][0-9]{12}'),
+          Validators.minLength(13),
+          Validators.maxLength(13)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required]
     }, {
@@ -45,7 +50,8 @@ export class RegisterComponent implements OnInit {
         this.registerForm.get('firstName')?.value,
         this.registerForm.get('lastName')?.value,
         this.registerForm.get('email')?.value,
-        this.registerForm.get('password')?.value));
+        this.registerForm.get('password')?.value,
+        this.registerForm.get('phoneNumber')?.value));
     }
   }
 

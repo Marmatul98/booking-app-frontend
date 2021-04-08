@@ -44,6 +44,8 @@ import {ExceptionComponent} from './component/exception/exception.component';
 import {ProfileComponent} from './component/profile/profile.component';
 import {UsersContactComponent} from './component/profile/users-contact/users-contact.component';
 import {UserBookingsComponent} from './component/profile/user-bookings/user-bookings.component';
+import {PasswordResetComponent} from './component/passwordReset/password-reset/password-reset.component';
+import {PasswordResetRequestComponent} from './component/passwordReset/password-reset-request/password-reset-request.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -68,6 +70,8 @@ FullCalendarModule.registerPlugins([
     ProfileComponent,
     UsersContactComponent,
     UserBookingsComponent,
+    PasswordResetComponent,
+    PasswordResetRequestComponent,
   ],
   imports: [
     BrowserModule,
