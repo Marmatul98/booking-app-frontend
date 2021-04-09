@@ -27,6 +27,7 @@ export class CartDialogComponent implements OnInit {
   public get form(): { [key: string]: AbstractControl } {
     return this.cartForm.controls;
   }
+
   ngOnInit(): void {
     this.selectedBookings = this.data.selectedBookings;
   }

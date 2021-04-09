@@ -33,7 +33,9 @@ export class RegisterComponent implements OnInit {
     }
   );
 
-  constructor(private authService: AuthenticationService, private formBuilder: FormBuilder, private connectorService: ConnectorService) {
+  constructor(private authService: AuthenticationService,
+              private formBuilder: FormBuilder,
+              private connectorService: ConnectorService) {
   }
 
   get form(): { [p: string]: AbstractControl } {
@@ -41,7 +43,8 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.connectorService.errorEvent.subscribe(value => this.handleError(value));
+    this.connectorService.errorEvent
+      .subscribe(value => this.handleError(value));
   }
 
   public onSubmit(): void {

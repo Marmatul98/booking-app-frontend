@@ -36,12 +36,8 @@ export class AuthenticationService extends HttpService {
     return !this.jwtService.isTokenExpired();
   }
 
-  public getUserId(): Observable<number> {
-    if (this.isUserLoggedIn()) {
-      return super.get(`api/userId/${this.jwtService.decodeToken().sub}`);
-    } else {
-      throw new Error('User is not logged in');
-    }
+  public getUserEmail(): string {
+    return this.jwtService.decodeToken().sub;
   }
 
   public logout(): void {

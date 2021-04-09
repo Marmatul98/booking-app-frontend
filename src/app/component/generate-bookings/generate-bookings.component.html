@@ -33,12 +33,15 @@
 
       <mat-form-field>
         <mat-label>Hřiště</mat-label>
-        <mat-select formControlName="sportsFieldId">
+        <mat-select formControlName="sportsFieldIds" multiple>
           <mat-option *ngFor="let sportsField of sportsFields"
                       value="{{sportsField.id}}">{{sportsField.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
+
+    <p [hidden]="!showErrorMessage" style="color: red">Rezervace na zvolená hřiště s tímto datem a časem už
+      existují!</p>
 
     <div class="form-row mt-2">
       <mat-radio-group aria-labelledby="radio-group" formControlName="empty">

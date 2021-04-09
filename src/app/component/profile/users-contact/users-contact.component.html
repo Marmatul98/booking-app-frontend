@@ -1,1 +1,42 @@
-<p>users-contact works!</p>
+<div class="container-fluid">
+  <h1>Kontaktní údaje</h1>
+  <h2>Zde můžete změnit své kontaktní údaje, které se budou předvyplňovat při rezervaci.</h2>
+  <div class="row">
+    <form (ngSubmit)="onSubmit()" [formGroup]="contactForm" style="font-size: large">
+
+      <div class="col">
+        <mat-form-field appearance="standard">
+          <mat-label>Telefonní číslo</mat-label>
+          <input formControlName="phoneNumber" matInput maxlength="13" placeholder="+420123456789" type="tel">
+          <mat-error *ngIf="form.phoneNumber.errors">Prosíme, zadejte telefonní číslo ve formátu +420123456789
+          </mat-error>
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-hint>Nyní: {{user?.phoneNumber}}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="standard">
+          <mat-label>Jméno</mat-label>
+          <input formControlName="firstName" matInput maxlength="25" type="text">
+          <mat-error *ngIf="form.firstName.errors">Prosíme, zadejte křestní jméno</mat-error>
+          <mat-icon matSuffix>face</mat-icon>
+          <mat-hint>Nyní: {{user?.firstName}}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="standard">
+          <mat-label>Příjmení</mat-label>
+          <input formControlName="lastName" matInput maxlength="25" type="text">
+          <mat-error *ngIf="form.lastName.errors">Prosíme, zadejte příjmení</mat-error>
+          <mat-icon matSuffix>people_alt</mat-icon>
+          <mat-hint>Nyní: {{user?.lastName}}</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col mt-2">
+        <button color="primary" mat-raised-button>Potvrdit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

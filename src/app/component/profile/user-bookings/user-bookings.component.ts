@@ -13,18 +13,16 @@ export class UserBookingsComponent implements OnInit {
   public pastBookings: Booking[] = [];
   public futureBookings: Booking[] = [];
 
-  constructor(private bookingService: BookingService, private authService: AuthenticationService) {
+  constructor(private bookingService: BookingService,
+              private authService: AuthenticationService) {
   }
 
   ngOnInit(): void {
-    this.authService.getUserId()
-      .subscribe(value => {
-        this.bookingService.getPastUserBookings(value)
-          .subscribe(apiPastBookings => this.pastBookings = apiPastBookings);
+    this.bookingService.getPastUserBookings(this.authService.getUserEmail())
+      .subscribe(apiPastBookings => this.pastBookings = apiPastBookings);
 
-        this.bookingService.getFutureUserBookings(value)
-          .subscribe(apiFutureBookings => this.futureBookings = apiFutureBookings)
-      });
+    this.bookingService.getFutureUserBookings(this.authService.getUserEmail())
+      .subscribe(apiFutureBookings => this.futureBookings = apiFutureBookings);
   }
 
   public convertToDate(value: string): string {

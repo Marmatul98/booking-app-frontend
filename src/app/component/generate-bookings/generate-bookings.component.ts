@@ -7,6 +7,9 @@ import {SportsField} from '../../../model/SportsField';
 import {SnackBarService} from '../../../service/snack-bar.service';
 import {DialogService} from '../../../service/dialog.service';
 import {BookingRequest} from '../../../model/BookingRequest';
+import {ErrorWrapper} from "../../../model/ErrorWrapper";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ConnectorService} from "../../../service/connector.service";
 
 @Component({
   selector: 'app-generate-bookings',
@@ -16,6 +19,7 @@ import {BookingRequest} from '../../../model/BookingRequest';
 export class GenerateBookingsComponent implements OnInit {
 
   public sportsFields: SportsField[] = [];
+  public showErrorMessage = false;
 
   public generateBookingsForm = this.formBuilder.group({
     startDate: ['', Validators.required],
@@ -23,7 +27,7 @@ export class GenerateBookingsComponent implements OnInit {
     startTime: ['', Validators.required],
     endTime: ['', Validators.required],
     duration: ['', [Validators.required, Validators.min(20)]],
-    sportsFieldId: ['', Validators.required],
+    sportsFieldIds: ['', Validators.required],
     empty: [true, Validators.required]
   });
 
@@ -35,8 +39,16 @@ export class GenerateBookingsComponent implements OnInit {
               private bookingService: BookingService,
               private sportsFieldService: SportsFieldService,
               private snackBarService: SnackBarService,
-              private dialogService: DialogService) {
-    this.sportsFieldService.getAllSportsFields().subscribe(value => this.sportsFields = value);
+              private dialogService: DialogService,
+              private connectorService: ConnectorService) {
+  }
+
+  ngOnInit(): void {
+    this.sportsFieldService.getAllSportsFields()
+      .subscribe(value => this.sportsFields = value);
+
+    this.connectorService.errorEvent
+      .subscribe(value => this.handleError(value));
   }
 
   public createBookings(): void {
@@ -50,7 +62,7 @@ export class GenerateBookingsComponent implements OnInit {
             this.parseTimeFromForm(this.form.startTime.value),
             this.parseTimeFromForm(this.form.endTime.value),
             this.form.duration.value,
-            this.form.sportsFieldId.value
+            this.form.sportsFieldIds.value
           );
           let result;
           if (this.form.empty.value) {
@@ -71,7 +83,14 @@ export class GenerateBookingsComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  private handleError(errorWrapper: ErrorWrapper): void {
+    if (errorWrapper.isError && errorWrapper.errorObject instanceof HttpErrorResponse) {
+      if (errorWrapper.errorObject.status === 409) {
+        this.showErrorMessage = true;
+      }
+    } else {
+      this.showErrorMessage = false;
+    }
   }
 
 
