@@ -26,7 +26,6 @@ export class ErrorInterceptor implements HttpInterceptor {
       }),
       catchError(err => {
         if (err instanceof HttpErrorResponse) {
-          console.warn('HttpError');
           this.connectorService.addError(err);
         }
         return throwError(err);

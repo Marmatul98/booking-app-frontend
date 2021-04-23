@@ -20,8 +20,7 @@ export class SportsFieldService extends HttpService {
     return super.post('admin/sportsField', name);
   }
 
-  public deleteSportsField(id: number): Observable<any> {
+  public deleteSportsField(id: string): Observable<any> {
     return super.delete('admin/sportsField/' + id);
   }
-
 }

@@ -1,14 +1,15 @@
-<div *ngIf="isLoggedIn">
-  <h1>Rezervace</h1>
-  <h3>Nejdříve vyberte datum:</h3>
-  <mat-form-field [style.fontSize.px]="16" class="mt-1">
-    <mat-label>Vyberte datum</mat-label>
-    <input (dateChange)="getBookings('change', $event)" (dateInput)="getBookings('input', $event)"
-           [matDatepicker]="picker" disabled
-           matInput>
-    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-    <mat-datepicker #picker disabled="false"></mat-datepicker>
-  </mat-form-field>
+<div class="container" style="background-color: white">
+  <div *ngIf="isLoggedIn">
+    <h1>Rezervace</h1>
+    <h3>Nejdříve vyberte datum:</h3>
+    <mat-form-field [style.fontSize.px]="16" class="mt-1">
+      <mat-label>Vyberte datum</mat-label>
+      <input (dateChange)="getBookings('change', $event)" (dateInput)="getBookings('input', $event)"
+             [matDatepicker]="picker" disabled
+             matInput>
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
 
   <h2 *ngIf="selectedDate !== ''">Vybíráte pro datum: {{this.selectedDate}} </h2>
 
@@ -89,12 +90,14 @@
     <strong>Pozor!</strong> Pro zvolené datum nelze rezervovat!
   </ngb-alert>
 
-  <div *ngIf="selectedBookings.length !==0" class="shopping-button">
-    <button (click)="openCartDialog()" aria-label="Nakupni kosik" class="expand-button" color="accent" mat-fab>
-      <mat-icon>shopping_cart</mat-icon>
-    </button>
+    <div *ngIf="selectedBookings.length !==0" class="shopping-button">
+      <button (click)="openCartDialog()" aria-label="Nakupni kosik" class="expand-button" color="accent" mat-fab>
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!isLoggedIn">
+    <h1>Pro rezervaci se prosím přihlašte.</h1>
   </div>
 </div>
-<div *ngIf="!isLoggedIn">
-  <h1>Pro rezervaci se prosím přihlašte.</h1>
-</div>
+

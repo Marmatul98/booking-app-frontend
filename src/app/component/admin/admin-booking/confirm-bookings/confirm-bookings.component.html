@@ -1,0 +1,23 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Hřiště</th>
+      <th scope="col">Datum a čas</th>
+      <th scope="col">Uživatel</th>
+      <th scope="col">Akce</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let booking of requestedBookings">
+      <td>{{booking.sportsField.name}}</td>
+      <td>{{convertToDate(booking.bookedDate)}} {{booking.startTime}}-{{booking.endTime}}</td>
+      <td>{{booking.user?.firstName}} {{booking.user?.lastName}} {{booking.user?.phoneNumber}}</td>
+      <td>
+        <button (click)="confirmBooking(booking)" class="mr-1" color="primary" mat-flat-button>Potvrdit</button>
+        <button (click)="removeRequest(booking)" color="warn" mat-flat-button>Smazat</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -15,16 +15,15 @@ export class UsersContactComponent implements OnInit {
 
   public contactForm = this.formBuilder.group(
     {
-      firstName: [``, [Validators.required, Validators.maxLength(25)]],
-      lastName: [``, [Validators.required, Validators.maxLength(25)]],
-      phoneNumber: [`+420`,
+      firstName: ['', [Validators.required, Validators.maxLength(25)]],
+      lastName: ['', [Validators.required, Validators.maxLength(25)]],
+      phoneNumber: ['+420',
         [Validators.required,
           Validators.pattern('[+][0-9]{12}'),
           Validators.minLength(13),
           Validators.maxLength(13)]],
     }
   );
-
 
   constructor(private authService: AuthenticationService,
               private userService: UserService,
@@ -39,6 +38,11 @@ export class UsersContactComponent implements OnInit {
     this.userService.getUserByEmail(this.authService.getUserEmail())
       .subscribe(value => {
         this.user = value;
+        this.contactForm.patchValue({
+          firstName: value.firstName,
+          lastName: value.lastName,
+          phoneNumber: value.phoneNumber
+        });
       });
   }
 
@@ -47,7 +51,7 @@ export class UsersContactComponent implements OnInit {
       this.user.phoneNumber = this.form.phoneNumber.value;
       this.user.firstName = this.form.firstName.value;
       this.user.lastName = this.form.lastName.value;
-      this.userServeedice.updateUser(this.user)
+      this.userService.updateUser(this.user)
         .subscribe();
     }
   }

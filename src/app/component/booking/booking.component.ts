@@ -7,7 +7,8 @@ import {Booking} from '../../../model/Booking';
 import {FormBuilder} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {CartDialogComponent} from '../cart-dialog/cart-dialog.component';
-import {AuthenticationService} from "../../../service/authentication.service";
+import {AuthenticationService} from '../../../service/authentication.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-booking',
@@ -28,7 +29,8 @@ export class BookingComponent implements OnInit {
               private bookingService: BookingService,
               private formBuilder: FormBuilder,
               private dialog: MatDialog,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -36,6 +38,9 @@ export class BookingComponent implements OnInit {
       .subscribe(value => this.sportsFields = value);
 
     this.isLoggedIn = this.authService.isUserLoggedIn();
+    if (!this.isLoggedIn) {
+      this.router.navigate(['login']).then();
+    }
   }
 
   public openCartDialog(): void {

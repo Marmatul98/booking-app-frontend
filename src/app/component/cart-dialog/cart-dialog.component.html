@@ -20,14 +20,14 @@
     </tr>
     </tbody>
   </table>
-  <form [formGroup]="cartForm">
+  <form (ngSubmit)="onSubmit()" [formGroup]="cartForm">
     <div class="row">
       <div class="col">
         <mat-form-field appearance="standard" style="width: 100%">
           <label for="firstName">
             <mat-label>Jméno</mat-label>
           </label>
-          <input formControlName="firstName" id="firstName" matInput type="text">
+          <input formControlName="firstName" id="firstName" matInput maxlength="25" type="text">
           <mat-error *ngIf="form.firstName.errors">Prosíme, zadejte jméno</mat-error>
         </mat-form-field>
       </div>
@@ -36,7 +36,7 @@
           <label for="lastName">
             <mat-label>Příjmení</mat-label>
           </label>
-          <input formControlName="lastName" id="lastName" matInput type="text">
+          <input formControlName="lastName" id="lastName" matInput maxlength="25" type="text">
           <mat-error *ngIf="form.lastName.errors">Prosíme, zadejte příjmení</mat-error>
         </mat-form-field>
       </div>
@@ -51,11 +51,11 @@
       </div>
       <div class="col">
         <mat-form-field appearance="standard" style="width: 100%">
-          <label for="mobileNumber">
+          <label for="phoneNumber">
             <mat-label>Telefonní číslo</mat-label>
           </label>
-          <input formControlName="mobileNumber" id="mobileNumber" matInput type="tel">
-          <mat-error *ngIf="form.mobileNumber.errors">Prosíme, zadejte telefonní číslo</mat-error>
+          <input formControlName="phoneNumber" id="phoneNumber" matInput maxlength="13" type="tel">
+          <mat-error *ngIf="form.phoneNumber.errors">Prosíme, zadejte telefonní číslo</mat-error>
         </mat-form-field>
       </div>
     </div>

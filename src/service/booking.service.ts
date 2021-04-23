@@ -2,8 +2,8 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpService} from './http.service';
 import {Observable} from 'rxjs';
 import {Booking} from '../model/Booking';
-import {RegisterData} from '../model/RegisterData';
 import {BookingRequest} from '../model/BookingRequest';
+import {User} from '../model/User';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,8 @@ export class BookingService extends HttpService {
     return super.get('admin/requestedBookings');
   }
 
-  public requestBooking(bookingId: number, registerData: RegisterData): Observable<any> {
-    return super.put(`api/booking/${bookingId}/`, registerData);
+  public requestBookings(user: User, bookings: Booking[]): Observable<any> {
+    return super.put('api/booking', {user, bookings});
   }
 
   public getBookingsBySportsFieldId(sportsFieldId: number): Observable<any> {

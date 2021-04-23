@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Správa hřišť</h1>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="sportsFieldForm">
+    <div class="row">
+      <div class="col-4">
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Jméno</mat-label>
+              <input formControlName="name" matInput>
+              <mat-error *ngIf="sportsFieldForm.controls.name.errors">Jméno je povinné</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="mt-1" color="primary" mat-raised-button>Vytvořit</button>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Jméno</th>
+        <th scope="col">Odstranit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sportsField of sportsFields">
+        <th scope="row">{{sportsField.name}}</th>
+        <td>
+          <button (click)="deleteSportsField(sportsField)" color="warn" mat-raised-button>Smazat</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

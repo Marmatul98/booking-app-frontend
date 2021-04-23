@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
-import {ErrorWrapper} from "../model/ErrorWrapper";
+import {ErrorWrapper} from '../model/ErrorWrapper';
 
 @Injectable({
   providedIn: 'root'
