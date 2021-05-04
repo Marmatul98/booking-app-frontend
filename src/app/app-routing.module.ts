@@ -17,6 +17,7 @@ import {MeetingRoomComponent} from './component/meeting-room/meeting-room.compon
 import {RestaurantComponent} from './component/restaurant/restaurant.component';
 import {AccommodationComponent} from './component/accommodation/accommodation.component';
 import {ContactComponent} from './component/contact/contact.component';
+import {UserComponent} from './component/admin/user/user.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'onas', pathMatch: 'full'},
@@ -59,6 +60,14 @@ const routes: Routes = [
   {
     path: 'admin/exception',
     component: ExceptionComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: 'ROLE_ADMIN'
+    }
+  },
+  {
+    path: 'admin/users',
+    component: UserComponent,
     canActivate: [AuthGuard],
     data: {
       roles: 'ROLE_ADMIN'

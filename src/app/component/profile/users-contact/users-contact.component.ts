@@ -3,6 +3,7 @@ import {UserService} from '../../../../service/user.service';
 import {User} from '../../../../model/User';
 import {AuthenticationService} from '../../../../service/authentication.service';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {SnackBarService} from "../../../../service/snack-bar.service";
 
 @Component({
   selector: 'app-users-contact',
@@ -27,7 +28,8 @@ export class UsersContactComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,
               private userService: UserService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private snackBarService: SnackBarService) {
   }
 
   get form(): { [p: string]: AbstractControl } {
@@ -52,7 +54,9 @@ export class UsersContactComponent implements OnInit {
       this.user.firstName = this.form.firstName.value;
       this.user.lastName = this.form.lastName.value;
       this.userService.updateUser(this.user)
-        .subscribe();
+        .toPromise().then(() => {
+        this.snackBarService.openSnackBarOk('Kontaktní údaje aktualizovány');
+      });
     }
   }
 }

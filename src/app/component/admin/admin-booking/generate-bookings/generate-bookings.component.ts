@@ -26,7 +26,6 @@ export class GenerateBookingsComponent implements OnInit {
     endDate: ['', Validators.required],
     startTime: ['', Validators.required],
     endTime: ['', Validators.required],
-    duration: ['30', [Validators.required, Validators.min(20)]],
     sportsFieldIds: ['', Validators.required],
     empty: [true, Validators.required]
   });
@@ -62,16 +61,15 @@ export class GenerateBookingsComponent implements OnInit {
               new Date(this.form.endDate.value),
               this.parseTimeFromForm(this.form.startTime.value),
               this.parseTimeFromForm(this.form.endTime.value),
-              this.form.duration.value,
               this.form.sportsFieldIds.value
             );
             let result;
-          if (this.form.empty.value) {
-            result = this.bookingService.generateBookings(bookingRequest);
-          } else {
-            result = this.bookingService.createAdminBooking(bookingRequest);
-          }
-          result.subscribe(() => this.snackBarService.openSnackBarOk('Rezervace vytvořeny'));
+            if (this.form.empty.value) {
+              result = this.bookingService.generateBookings(bookingRequest);
+            } else {
+              result = this.bookingService.createAdminBooking(bookingRequest);
+            }
+            result.subscribe(() => this.snackBarService.openSnackBarOk('Rezervace vytvořeny'));
         }
       });
     }

@@ -26,12 +26,6 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Interval v minutách</mat-label>
-        <input formControlName="duration" matInput min="20" type="number">
-        <mat-error *ngIf="form.startDate.errors">Interval je povinný</mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
         <mat-label>Hřiště</mat-label>
         <mat-select formControlName="sportsFieldIds" multiple>
           <mat-option *ngFor="let sportsField of sportsFields"

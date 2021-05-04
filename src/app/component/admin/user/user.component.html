@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Přehled uživatelů</h1>
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">Příjmení</th>
+        <th scope="col">Jméno</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Telefonní číslo</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.lastName}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phoneNumber}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

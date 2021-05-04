@@ -47,14 +47,22 @@ import {PasswordResetComponent} from './component/passwordReset/password-reset/p
 import {PasswordResetRequestComponent} from './component/passwordReset/password-reset-request/password-reset-request.component';
 import {HomeComponent} from './component/home/home.component';
 import {OkDialogComponent} from './component/ok-dialog/ok-dialog.component';
-import {CarouselModule} from "ngx-bootstrap/carousel";
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {SportsHallComponent} from './component/sports-hall/sports-hall.component';
 import {OutsideFieldComponent} from './component/outside-field/outside-field.component';
 import {MeetingRoomComponent} from './component/meeting-room/meeting-room.component';
 import {RestaurantComponent} from './component/restaurant/restaurant.component';
 import {AccommodationComponent} from './component/accommodation/accommodation.component';
 import {ContactComponent} from './component/contact/contact.component';
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {UserComponent} from './component/admin/user/user.component';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FooterComponent} from './component/footer/footer.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {SpinnerDialogComponent} from './component/spinner-dialog/spinner-dialog.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {GoogleMapsModule} from "@angular/google-maps";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -88,6 +96,9 @@ FullCalendarModule.registerPlugins([
     RestaurantComponent,
     AccommodationComponent,
     ContactComponent,
+    UserComponent,
+    FooterComponent,
+    SpinnerDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,7 +133,12 @@ FullCalendarModule.registerPlugins([
       }
     }),
     CarouselModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FontAwesomeModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    GoogleMapsModule,
   ],
   providers: [
     {

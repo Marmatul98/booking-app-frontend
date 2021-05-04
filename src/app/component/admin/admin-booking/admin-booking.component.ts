@@ -43,7 +43,6 @@ export class AdminBookingComponent implements OnInit {
         new Date(this.form.endDate.value),
         this.parseTimeFromForm(this.form.startTime.value),
         this.parseTimeFromForm(this.form.endTime.value),
-        this.form.duration.value,
         this.form.sportsFieldId.value
       )).subscribe(() => this.snackBarService.openSnackBarOk('Rezervace vytvořeny'), error => console.log(error));
   }

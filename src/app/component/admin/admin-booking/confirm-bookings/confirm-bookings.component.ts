@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Booking} from '../../../../../model/Booking';
 import {BookingService} from '../../../../../service/booking.service';
 import {SnackBarService} from '../../../../../service/snack-bar.service';
+import {DialogService} from "../../../../../service/dialog.service";
 
 @Component({
   selector: 'app-confirm-bookings',
@@ -12,7 +13,9 @@ export class ConfirmBookingsComponent implements OnInit {
 
   public requestedBookings: Booking[] = [];
 
-  constructor(private bookingService: BookingService, private snackBarService: SnackBarService) {
+  constructor(private bookingService: BookingService,
+              private snackBarService: SnackBarService,
+              private dialogService: DialogService) {
     this.loadRequestedBookings();
   }
 
@@ -20,21 +23,29 @@ export class ConfirmBookingsComponent implements OnInit {
   }
 
   public removeRequest(booking: Booking): void {
-    this.bookingService.removeBooking(booking.bookingId)
+    this.dialogService.openSpinnerDialog();
+    this.bookingService.removeBooking(booking)
       .toPromise()
       .then(() => {
+        this.dialogService.closeSpinnerDialog();
         this.snackBarService.openSnackBarOk('Rezervace zrušena');
         this.loadRequestedBookings();
       });
   }
 
   public confirmBooking(booking: Booking): void {
-    this.bookingService.confirmBooking(booking.bookingId)
+    this.dialogService.openSpinnerDialog();
+    this.bookingService.confirmBooking(booking)
       .toPromise()
       .then(() => {
+        this.dialogService.closeSpinnerDialog();
         this.snackBarService.openSnackBarOk('Rezervace potvrzena');
         this.loadRequestedBookings();
       });
+  }
+
+  public convertToDate(value: string): string {
+    return new Date(value).toLocaleDateString();
   }
 
   private loadRequestedBookings(): void {
@@ -42,10 +53,6 @@ export class ConfirmBookingsComponent implements OnInit {
       .subscribe(value => {
         this.requestedBookings = value;
       });
-  }
-
-  public convertToDate(value: string): string {
-    return new Date(value).toLocaleDateString();
   }
 
 }

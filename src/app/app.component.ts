@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthenticationService} from '../service/authentication.service';
+import {faFacebook, faInstagram} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,9 @@ export class AppComponent {
   public secret = 'Nejde';
 
   public isMenuCollapsed = true;
+
+  public instagramIcon = faInstagram;
+  public facebookIcon = faFacebook;
 
   constructor(private jwtService: JwtHelperService, private authService: AuthenticationService) {
   }

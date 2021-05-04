@@ -13,7 +13,9 @@ export class ViewBookingsComponent implements OnInit {
 
   public bookings: Booking[] = [];
 
-  constructor(private bookingService: BookingService, private dialogService: DialogService, private snackBarService: SnackBarService) {
+  constructor(private bookingService: BookingService,
+              private dialogService: DialogService,
+              private snackBarService: SnackBarService) {
     this.loadConfirmedBookings();
   }
 
@@ -24,8 +26,10 @@ export class ViewBookingsComponent implements OnInit {
     this.dialogService.openConfirmDialog('Pozor!', `Opravdu chcete zrušit rezervaci ${booking.user?.firstName} ${booking.user?.lastName}?`)
       .subscribe(value => {
         if (value) {
-          this.bookingService.removeBooking(booking.bookingId)
+          this.dialogService.openSpinnerDialog();
+          this.bookingService.removeBooking(booking)
             .subscribe(() => {
+              this.dialogService.closeSpinnerDialog();
               this.snackBarService.openSnackBarOk('Rezervace zrušena');
               this.loadConfirmedBookings();
             });

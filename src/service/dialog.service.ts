@@ -1,13 +1,17 @@
 import {Injectable} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../app/component/confirm-dialog/confirm-dialog.component';
 import {Observable} from 'rxjs';
 import {OkDialogComponent} from '../app/component/ok-dialog/ok-dialog.component';
+import {SpinnerDialogComponent} from '../app/component/spinner-dialog/spinner-dialog.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
+
+  // @ts-ignore
+  private spinnerDialogRef: MatDialogRef<SpinnerDialogComponent, any>;
 
   constructor(private matDialog: MatDialog) {
   }
@@ -32,5 +36,16 @@ export class DialogService {
     };
 
     this.matDialog.open(OkDialogComponent, dialogConfig);
+  }
+
+  public openSpinnerDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+
+    this.spinnerDialogRef = this.matDialog.open(SpinnerDialogComponent, dialogConfig);
+  }
+
+  public closeSpinnerDialog(): void {
+    this.spinnerDialogRef.close();
   }
 }

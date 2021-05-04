@@ -19,4 +19,8 @@ export class UserService extends HttpService {
   public updateUser(user: User): Observable<any> {
     return super.put('api/user', user);
   }
+
+  public getAllUsers(): Observable<User[]> {
+    return super.get('admin/user');
+  }
 }
