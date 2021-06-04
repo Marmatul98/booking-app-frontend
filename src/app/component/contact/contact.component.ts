@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {faFacebook, faInstagram} from '@fortawesome/free-brands-svg-icons';
+import {faEnvelopeOpen, faMobileAlt} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-contact',
@@ -7,10 +9,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  public options: google.maps.MapOptions = {
-    center: {lat: 40, lng: -20},
-    zoom: 4
-  };
+  public facebookIcon = faFacebook;
+  public instagramIcon = faInstagram;
+  public mobileIcon = faMobileAlt;
+  public emailIcon = faEnvelopeOpen;
 
   constructor() {
   }

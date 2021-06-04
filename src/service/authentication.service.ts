@@ -5,13 +5,18 @@ import {Router} from '@angular/router';
 import {SnackBarService} from './snack-bar.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Observable} from 'rxjs';
+import {DialogService} from './dialog.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService extends HttpService {
 
-  constructor(injector: Injector, private router: Router, private snackBarService: SnackBarService, private jwtService: JwtHelperService) {
+  constructor(injector: Injector,
+              private router: Router,
+              private snackBarService: SnackBarService,
+              private jwtService: JwtHelperService,
+              private dialogService: DialogService) {
     super(injector);
   }
 
@@ -19,7 +24,7 @@ export class AuthenticationService extends HttpService {
     super.post('auth/register', registerData)
       .subscribe(() => {
         this.router.navigate(['login']).then();
-        this.snackBarService.openSnackBarOk('Registrace úspěšná, můžete se přihlásit');
+        this.dialogService.openOkDialog('Registrace úspěšná', 'Registrace byla úspěšná, pro rezervaci hřišť se prosím prihlašte.');
       });
   }
 

@@ -18,7 +18,8 @@ export class SportsFieldComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private sportsFieldService: SportsFieldService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+  ) {
     this.loadSportsFields();
   }
 
@@ -45,10 +46,23 @@ export class SportsFieldComponent implements OnInit {
     }
   }
 
+  public groupSportsField(sportsField: SportsField): void {
+    this.sportsFieldService.groupSportsField(sportsField.id)
+      .toPromise()
+      .then(() => this.loadSportsFields());
+  }
+
+  public ungroupSportsField(sportsField: SportsField): void {
+    this.sportsFieldService.ungroupSportsField(sportsField.id)
+      .toPromise()
+      .then(() => this.loadSportsFields());
+  }
+
   private loadSportsFields(): void {
-    this.sportsFieldService.getAllSportsFields().subscribe(
-      data => this.sportsFields = data
-    );
+    this.sportsFieldService.getAllSportsFields()
+      .subscribe(
+        data => this.sportsFields = data
+      );
   }
 
 }

@@ -6,8 +6,11 @@ import {UserService} from '../../../service/user.service';
 import {AuthenticationService} from '../../../service/authentication.service';
 import {BookingService} from '../../../service/booking.service';
 import {User} from '../../../model/User';
-import {Router} from "@angular/router";
-import {DialogService} from "../../../service/dialog.service";
+import {Router} from '@angular/router';
+import {DialogService} from '../../../service/dialog.service';
+import {ConnectorService} from "../../../service/connector.service";
+import {ErrorWrapper} from "../../../model/ErrorWrapper";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-cart-dialog',
@@ -37,7 +40,8 @@ export class CartDialogComponent implements OnInit {
               private authService: AuthenticationService,
               private bookingService: BookingService,
               private dialogService: DialogService,
-              private router: Router) {
+              private router: Router,
+              private connectorService: ConnectorService) {
   }
 
   public get form(): { [key: string]: AbstractControl } {
@@ -56,6 +60,8 @@ export class CartDialogComponent implements OnInit {
           phoneNumber: value.phoneNumber
         });
       });
+    this.connectorService.errorEvent
+      .subscribe(value => this.handleError(value));
   }
 
   public convertToDate(value: string): string {
@@ -88,6 +94,14 @@ export class CartDialogComponent implements OnInit {
             ' o dalším postupu budete informováni v emailu');
           this.router.navigate(['']).then();
         });
+    }
+  }
+
+  private handleError(errorWrapper: ErrorWrapper): void {
+    if (errorWrapper.isError && errorWrapper.errorObject instanceof HttpErrorResponse) {
+      if (errorWrapper.errorObject.status === 400) {
+        this.dialogService.openOkDialog('Nelze', 'Nelze rezervovat celou halu a zároveň její podčásti !');
+      }
     }
   }
 }

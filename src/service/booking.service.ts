@@ -30,7 +30,7 @@ export class BookingService extends HttpService {
     return super.get('api/bookings' + sportsFieldId);
   }
 
-  public getConfirmedBookings(): Observable<Booking[]> {
+  public getFutureConfirmedBookings(): Observable<Booking[]> {
     return super.get('admin/confirmedBookings');
   }
 
@@ -54,7 +54,11 @@ export class BookingService extends HttpService {
     return super.get(`api/pastUserBookings/${email}`);
   }
 
-  getFutureUserBookings(email: string): Observable<Booking[]> {
+  public getFutureUserBookings(email: string): Observable<Booking[]> {
     return super.get(`api/futureUserBookings/${email}`);
+  }
+
+  public getGroupedBookings(date: Date): Observable<Booking[]> {
+    return super.post('api/groupedBookings', date.toLocaleDateString());
   }
 }

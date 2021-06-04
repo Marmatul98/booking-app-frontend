@@ -1,5 +1,4 @@
 import {ErrorHandler, Injectable} from '@angular/core';
-import {HttpErrorResponse} from '@angular/common/http';
 import {ConnectorService} from '../service/connector.service';
 import {DialogService} from '../service/dialog.service';
 
@@ -10,16 +9,9 @@ export class ErrorsHandler implements ErrorHandler {
               private dialogService: DialogService) {
   }
 
-  handleError(error: Error | HttpErrorResponse): void {
-    if (error instanceof HttpErrorResponse) {
-      if (error.status === 500) {
-        this.showErrorDialog();
-        console.warn(error);
-      }
-    } else {
-      this.connectorService.addError(error);
+  handleError(error: Error): void {
+    if (error instanceof ErrorEvent) {
       this.showErrorDialog();
-      console.warn(error);
     }
   }
 

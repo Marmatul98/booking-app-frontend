@@ -73,9 +73,11 @@
           <td class="sportsField-name">{{sportField.name}}</td>
           <td (click)="booking.isSelected ? deselectBooking(booking) : selectBooking(booking)"
               *ngFor="let booking of sportField.bookings"
-              [ngClass]="{'slot-full': booking.user !==null,
-           'slot-empty':booking.user === null && !booking.isSelected,
-            'slot-selected': booking.isSelected}"
+              [ngClass]="{
+              'slot-full': !booking.available,
+              'slot-empty': booking.available && !booking.isSelected,
+              'slot-selected': booking.isSelected
+              }"
               class="slot"
               matTooltip="{{booking.startTime}} - {{booking.endTime}}"></td>
         </tr>

@@ -16,10 +16,10 @@ export class ViewBookingsComponent implements OnInit {
   constructor(private bookingService: BookingService,
               private dialogService: DialogService,
               private snackBarService: SnackBarService) {
-    this.loadConfirmedBookings();
   }
 
   ngOnInit(): void {
+    this.loadConfirmedBookings();
   }
 
   removeBooking(booking: Booking): void {
@@ -38,6 +38,7 @@ export class ViewBookingsComponent implements OnInit {
   }
 
   private loadConfirmedBookings(): void {
-    this.bookingService.getConfirmedBookings().subscribe(value => this.bookings = value);
+    this.bookingService.getFutureConfirmedBookings()
+      .subscribe(value => this.bookings = value);
   }
 }

@@ -59,10 +59,10 @@ import {UserComponent} from './component/admin/user/user.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FooterComponent} from './component/footer/footer.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {SpinnerDialogComponent} from './component/spinner-dialog/spinner-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {GoogleMapsModule} from "@angular/google-maps";
+import {GoogleMapsModule} from '@angular/google-maps';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,

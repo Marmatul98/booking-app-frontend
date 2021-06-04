@@ -23,4 +23,12 @@ export class SportsFieldService extends HttpService {
   public deleteSportsField(id: string): Observable<any> {
     return super.delete('admin/sportsField/' + id);
   }
+
+  public groupSportsField(sportsFieldId: string): Observable<any> {
+    return super.put(`admin/groupSportsField/${sportsFieldId}`, {});
+  }
+
+  public ungroupSportsField(sportsFieldId: string): Observable<any> {
+    return super.put(`admin/ungroupSportsField/${sportsFieldId}`, {});
+  }
 }

@@ -1,4 +1,4 @@
-<div class="p-1 row align-items-center justify-content-around"
+<div class="p-1 row align-items-center"
      style="background-color: #212F3D; color: #FDFEFE; width: 100%">
   <div class="col-md-1">
     +420 732 552 897
@@ -6,13 +6,11 @@
   <div class="col-md-1">
     sportcentrum.pustejov@gmail.com
   </div>
-  <div class="col-md-1">
+  <div class="col-md-1 ml-auto">
     <a href="https://www.instagram.com" style="color: inherit">
       <fa-icon [icon]="facebookIcon" size="2x"></fa-icon>
     </a>
-  </div>
-  <div class="col-md-1">
-    <a href="https://www.instagram.com" style="color: inherit">
+    <a class="ml-1" href="https://www.instagram.com" style="color: inherit">
       <fa-icon [icon]="instagramIcon" size="2x"></fa-icon>
     </a>
   </div>
@@ -59,7 +57,6 @@
         <a (click)="false" class="nav-link" mat-button ngbDropdownToggle style="color: #212F3D">Admin</a>
         <div ngbDropdownMenu>
           <a class="dropdown-item" [routerLink]="'admin/booking'">Správa rezervací</a>
-          <a class="dropdown-item" [routerLink]="'admin/sportsField'">Správa hřišť</a>
           <a [routerLink]="'admin/exception'" class="dropdown-item">Správa chyb</a>
           <a [routerLink]="'admin/users'" class="dropdown-item">Správa uživatelů</a>
         </div>
@@ -82,5 +79,5 @@
 <div>
   <router-outlet></router-outlet>
 </div>
-<app-footer></app-footer>
+<app-footer class="app-footer"></app-footer>
 

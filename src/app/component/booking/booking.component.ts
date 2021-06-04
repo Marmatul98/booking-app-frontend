@@ -8,7 +8,7 @@ import {FormBuilder} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import {CartDialogComponent} from '../cart-dialog/cart-dialog.component';
 import {AuthenticationService} from '../../../service/authentication.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -20,6 +20,7 @@ export class BookingComponent implements OnInit {
   @ViewChild('bookingButton', {static: true}) bookingButton: ElementRef | undefined;
 
   public sportsFields: SportsField[] = [];
+  public groupedBookings: Booking[] = [];
   public reservationDiv = false;
   public selectedBookings: Booking[] = [];
   public selectedDate = '';
@@ -74,7 +75,7 @@ export class BookingComponent implements OnInit {
   }
 
   public selectBooking(booking: Booking): void {
-    if (booking.user === null) {
+    if (booking.available) {
       booking.isSelected = true;
       this.selectedBookings.push(booking);
     }

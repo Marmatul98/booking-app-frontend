@@ -24,8 +24,8 @@ export class GenerateBookingsComponent implements OnInit {
   public generateBookingsForm = this.formBuilder.group({
     startDate: ['', Validators.required],
     endDate: ['', Validators.required],
-    startTime: ['', Validators.required],
-    endTime: ['', Validators.required],
+    startTime: ['08:00', Validators.required],
+    endTime: ['22:00', Validators.required],
     sportsFieldIds: ['', Validators.required],
     empty: [true, Validators.required]
   });
